@@ -1,11 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
+import { SafeAreaView, StyleSheet, View, Image, FlatList } from "react-native";
 
 const HomeScreen = () => {
   const apiKey = "563492ad6f91700001000001cd92a8ae327d4be99f12df0692874fc6";
-  const url = "https://api.pexels.com/v1/search?query=cars";
-  const [imgSrc, setImgSrc] = useState("");
+  const url =
+    "https://api.pexels.com/v1/search?query=motercycle&color=black&orientation=portrait&size=large&per_page=10";
+  const [imgSrc, setImgSrc] = useState(null);
 
   const getImg = async () => {
     try {
@@ -14,23 +15,33 @@ const HomeScreen = () => {
           Authorization: apiKey,
         },
       });
-      const json = await response.json();
-      setImgSrc(json.photos[10].src["large"]);
+      const { photos } = await response.json();
+      return photos;
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    getImg();
+    const fetchImg = async () => {
+      const images = await getImg();
+      setImgSrc(images);
+      console.log(images)
+    };
+    fetchImg();
   }, []);
-
   return (
     <SafeAreaView style={styles.container}>
-      <Image
-        style={{ height: 450, width: 350, borderRadius: 2 }}
-        source={{
-          uri: imgSrc,
+      <FlatList
+        data={imgSrc}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => {
+          return (
+            <Image
+              source={{ uri: item.src.portrait }}
+              style={{ width: 360, height: 700 }}
+            />
+          );
         }}
       />
     </SafeAreaView>
