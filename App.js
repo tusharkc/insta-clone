@@ -13,7 +13,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="HomeScreen">
           <Stack.Screen
             name="Login"
             component={LoginScreen}

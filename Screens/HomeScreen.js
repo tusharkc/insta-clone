@@ -7,10 +7,12 @@ import {
   FlatList,
   View,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { Icon, Avatar, Text } from "react-native-elements";
 import { Dimensions } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import BottomNav from "../Components/BottomNav";
 
 let ScreenHeight = Dimensions.get("window").height;
 let ScreenWidth = Dimensions.get("window").width;
@@ -18,7 +20,7 @@ let ScreenWidth = Dimensions.get("window").width;
 const HomeScreen = () => {
   const apiKey = "563492ad6f91700001000001cd92a8ae327d4be99f12df0692874fc6";
   const url =
-    "https://api.pexels.com/v1/search?query=nature&orientation=portrait&size=large&per_page=20&page=2";
+    "https://api.pexels.com/v1/search?query=clothing&orientation=portrait&size=large&per_page=20&page=2";
   const [imgSrc, setImgSrc] = useState(null);
 
   const getImg = async () => {
@@ -43,6 +45,7 @@ const HomeScreen = () => {
     };
     fetchImg();
   }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
@@ -116,27 +119,9 @@ const HomeScreen = () => {
 
               <View style={styles.interactionContainer}>
                 <View style={styles.iconMain}>
-                  <Icon
-                    style={styles.iconHeart}
-                    size={25}
-                    name="heart"
-                    type="feather"
-                    color="#000"
-                  />
-                  <Icon
-                    style={styles.iconComment}
-                    size={25}
-                    name="comment"
-                    type="fontisto"
-                    color="#000"
-                  />
-                  <Icon
-                    style={styles.iconShare}
-                    size={25}
-                    name="paper-plane-o"
-                    type="font-awesome"
-                    color="#000"
-                  />
+                  <Icon size={25} name="heart" type="feather" />
+                  <Icon size={25} name="comment" type="fontisto" />
+                  <Icon size={25} name="paper-plane-o" type="font-awesome" />
                 </View>
 
                 <Icon
@@ -147,10 +132,54 @@ const HomeScreen = () => {
                   color="#000"
                 />
               </View>
+              <View style={styles.commentSectionContainer}>
+                <Text style={styles.likeCount}>1000 likes</Text>
+                <View style={styles.captionConttainer}>
+                  <Text style={{ fontWeight: "bold", marginRight: 5 }}>
+                    igCloneByTushar
+                  </Text>
+                  <Text>This is the caption of the above Image</Text>
+                </View>
+                <TouchableOpacity>
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      color: "grey",
+                      marginTop: 2,
+                      marginBottom: 2,
+                    }}
+                  >
+                    View all 200 comments
+                  </Text>
+                </TouchableOpacity>
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    marginBottom: 5,
+                  }}
+                >
+                  <Text style={{ fontWeight: "bold", marginRight: 5 }}>
+                    otherUserName
+                  </Text>
+                  <Text>This could be a comment on this post</Text>
+                </View>
+              </View>
+              <Text
+                style={{
+                  marginLeft: 10,
+                  color: "grey",
+                  fontWeight: "500",
+                  marginBottom: 5,
+                }}
+              >
+                1 DAY AGO
+              </Text>
             </SafeAreaView>
           );
         }}
       />
+      <BottomNav />
     </SafeAreaView>
   );
 };
@@ -276,13 +305,22 @@ const styles = StyleSheet.create({
     height: 40,
   },
 
-  iconHeart: {},
-
-  iconComment: {},
-
-  iconShare: {},
-
   iconBookmark: {
     marginRight: 10,
+  },
+
+  commentSectionContainer: {
+    marginLeft: 10,
+  },
+  likeCount: {
+    fontWeight: "bold",
+    fontSize: 15,
+    marginTop: 1,
+    marginBottom: 1,
+  },
+  captionConttainer: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: 2,
   },
 });
