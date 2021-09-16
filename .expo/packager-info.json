@@ -1,4 +1,8 @@
 {
   "expoServerPort": 19000,
-  "packagerPort": 19000
+  "packagerPort": 19000,
+  "devToolsPort": 19002,
+  "expoServerNgrokUrl": "https://x4-gmh.tusharkc91.instagram-clone.exp.direct",
+  "packagerNgrokUrl": "https://packager.x4-gmh.tusharkc91.instagram-clone.exp.direct",
+  "ngrokPid": 1508
 }

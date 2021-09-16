@@ -20,7 +20,7 @@ let ScreenWidth = Dimensions.get("window").width;
 const HomeScreen = () => {
   const apiKey = "563492ad6f91700001000001cd92a8ae327d4be99f12df0692874fc6";
   const url =
-    "https://api.pexels.com/v1/search?query=clothing&orientation=portrait&size=large&per_page=20&page=2";
+    "https://api.pexels.com/v1/search?query=clothing&orientation=portrait&size=large&per_page=79&page=2";
   const [imgSrc, setImgSrc] = useState(null);
 
   const getImg = async () => {
